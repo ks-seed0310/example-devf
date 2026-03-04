@@ -22,7 +22,11 @@
       
     }
     if (h!=""){
-      p.textContent=tobin(h[0],h[1]??2,h[2]??"utf-8")
+      try{
+        p.textContent=tobin(decodeURIComponent(h[0]),h[1]??2,h[2]??"utf-8")
+      }catch{
+        p.textContent=tobin(h[0],h[1]??2,h[2]??"utf-8")
+      }
     }else{
       p.textContent=tobin(`
 おめでとうございます!!
