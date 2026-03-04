@@ -14,7 +14,7 @@
       return op
     }
     const h=location.hash.substring(1).split("\x00")
-    if (h==["admin","admin","admin"]){
+    if (h[0]==h[1]&&h[1]==h[2]&&h[2]=="original"){
       h[0]=prompt("msg")
       h[1]=Number(prompt("opbase"))
       h[2]=prompt("Encode")
