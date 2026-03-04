@@ -13,7 +13,7 @@
       let op=[...new TextEncoder(encode).encode(msg)].map(x=>x.toString(base).padStart(8,0)).join(" ")
       return op
     }
-    const h=location.hash.substring(1).split("\x00")
+    const h=location.hash.substring(1).split("%00")
     if (h[0]==h[1]&&h[1]==h[2]&&h[2]=="original"){
       h[0]=prompt("msg")
       h[1]=Number(prompt("opbase"))
