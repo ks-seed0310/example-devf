@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang=ja>
+  <head>
+    <meta charset=utf-8>
+  </head>
+  <body>
+    <p id=p></p>
+  </body>
+  <script>
+    "use strict";
+    const p=document.getElementById("p")
+    function tobin(msg,base=2,encode="utf-8"){
+      let op=[...new TextEncoder(encode).encode(msg)].map(x=>x.toString(base)).join(" ")
+      return op
+    }
+    const h=location.hash.substring(1).split("\x00")
+    if (h!=""){
+      p.textContent=tobin(h[0],h[1]??2,h[2]??"utf-8")
+    }else{
+      p.textContent=tobin(`
+おめでとうございます!!
+バイナリ解析大成功です。
+いやー2進数の応用でしたねー。
+難しかったですか?
+また続きを無限に作るので感想も教えてくださいね!
+次回をお楽しみに!!
+https://github.com/ks-seed0310
+This URL : ${location.href}
+    `)
+        }
+  </script>
+</html>
