@@ -10,7 +10,7 @@
     "use strict";
     const p=document.getElementById("p")
     function tobin(msg,base=2,encode="utf-8"){
-      let op=[...new TextEncoder(encode).encode(msg)].map(x=>x.toString(base)).join(" ")
+      let op=[...new TextEncoder(encode).encode(msg)].map(x=>x.toString(base).padStart(8,0)).join(" ")
       return op
     }
     const h=location.hash.substring(1).split("\x00")
