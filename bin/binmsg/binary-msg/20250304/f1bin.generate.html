@@ -1,41 +1,48 @@
 <!doctype html>
-<html lang=ja>
+<html lang="ja">
 <head>
-  <meta charset=utf-8>
+  <meta charset="utf-8">
+  <title>Binary Msg Generator</title>
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+    textarea { width: 100%; height: 100px; }
+    input[type=number] { width: 60px; }
+    button { margin-top: 10px; cursor: pointer; }
+  </style>
 </head>
 <body>
-  Text(長いとぶっ壊れるのでご注意を):<br /><textarea id=main></textarea><br />
-  Base(x進数の事です):<br /><input type=number id=base value=2><br />
-  Generate!:<button onclick=generate(1)>生成</button>
-</body>
+  Text (長いとURL制限で壊れるので注意):<br />
+  <textarea id="main" placeholder="ここに変換したいテキストを入力"></textarea><br />
+  Base (2〜36進数):<br />
+  <input type="number" id="base" value="2"><br />
+  <button onclick="generate(1)">URLを生成してコピー</button>
+
 <script>
   "use strict";
-  const base="https://ks-seed0310.github.io/example-devf/bin/binmsg/binary-msg/20250304/f1bin.html"
+  const base_url = "https://ks-seed0310.github.io/example-devf/bin/binmsg/binary-msg/20250304/f1bin.html";
   function copyText(text) {
     navigator.clipboard.writeText(text)
       .then(() => {
-        alert('コピーしました: ' + text);
-        return 0
+        alert('コピーしました！\n' + text);
       })
       .catch(err => {
-        alert("コピー失敗。Ctrl+Shift+i(F12)にURLが表示されているので自力コピーお願いします");
-        return 1
+        alert("コピーに失敗しました。F12キーでコンソールを開いてコピーしてください。");
       });
   }
-  function generate(md){
-    let re=""
-    re=encodeURIComponent(document.getElementById("main").value)
-    url=`${base}#${re}%00${document.getElementById("base").value}%00${"utf-8"}`
-    console.log(url)
-    if (md){
-      if (confirm("クリップボードにコピーしますか")){
-        copyText(url)
+  function generate(md) {
+    const mainText = encodeURIComponent(document.getElementById("main").value);
+    const baseNum = document.getElementById("base").value || "2";
+    const charset = "utf-8";
+    const url = `${base_url}#${mainText}%00${baseNum}%00${charset}`;
+    console.log(url);
+    if (md) {
+      if (confirm("URLをクリップボードにコピーしますか？")) {
+        copyText(url);
       }
-    }else{
-      return url
+    } else {
+      return url;
     }
   }
-  
 </script>
-
+</body>
 </html>
