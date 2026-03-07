@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang=ja>
+<head>
+  <meta charset=utf-8>
+</head>
+<body>
+  Text(長いとぶっ壊れるのでご注意を):<br /><textarea id=main></textarea><br />
+  Base(x進数の事です):<br /><input type=number id=base><br />
+  Generate!:<button onclick=generate(1)></button>
+</body>
+<script>
+  "use strict";
+  const base="https://ks-seed0310.github.io/example-devf/bin/binmsg/binary-msg/20250304/f1bin.html"
+  function copyText(text) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        alert('コピーしました: ' + text);
+        return 0
+      })
+      .catch(err => {
+        alert("コピー失敗。Ctrl+Shift+i(F12)にURLが表示されているので自力コピーお願いします");
+        return 1
+      });
+  }
+  function generate(md){
+    let re=""
+    re=encodeURIComponent(document.getElementById("main").value)
+    url=`${base}#${re}%00${document.getElementById("base").value}%00${"utf-8"}`
+    console.log(url)
+    if (md){
+      if (confirm("クリップボードにコピーしますか")){
+        copyText(url)
+      }
+    }else{
+      return url
+    }
+  }
+  
+</script>
+
+</html>
